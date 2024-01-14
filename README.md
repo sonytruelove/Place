@@ -37,6 +37,7 @@ Next.js, Typescript, Webpack
 <li>Nest.js</li>
 <li>Tarantool DB - fast DB as a cache replacement for fast response</li>
 <li>Cockroach DB - other heavy content(files,chats)</li>
+<li>JWT auth, SwaggerAPI, Typescript, Prisma, Class-validator</li>
 <li>Nginx, Docker, Minicube/K3s/KuberSpray</li>
 </ul>
 
