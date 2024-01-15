@@ -11,3 +11,6 @@ Nest js doesn't support Windows 7, so I had to install nest js on Debian 12 VM
 <h2>PROBLEM #1</h2>
 <br>Prisma ORM doesn't support search in CockroachDB.<br>
 Feel free to give me a solution!<br>
+
+<h2>PROBLEM #2</h2>
+S3 or CDN? I can't use cdn locally,so i choose open source Scality S3 
