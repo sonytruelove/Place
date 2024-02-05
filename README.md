@@ -63,7 +63,7 @@ It's no start-up, so i needn't.
 <ul>
 <li>✅ Describe a requirements</li>
 <li>✅ Describe a Architecture with Tech-stack</li>
-<li>Introduce a server part of project</li>
+<li>✅ Introduce a server part of project</li>
 <li>Describe a Code-of-Conduct</li>
 <li>Describe User-flow</li>
 <li>Introduce a front-end part of project</li>
