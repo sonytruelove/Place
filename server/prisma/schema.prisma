@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"] 
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id    Int @id @default(sequence())
+  name  String 
+  email String @unique
+  hash  String 
+  salt  String
+  
+  account Account?
+}
+model Account{
+  id      Int @id @default(sequence(minValue: 100,start: 100))
+  ownerId Int @unique
+  owner   User @relation(fields: [ownerId], references: [id])
+  
+  places Place[]
+}
+
+model Place {
+  id Int @id @default(sequence())
+  ownerId Int  @unique
+  owner   Account @relation(fields: [ownerId], references: [id])
+  accessIdList  Int[]
+  url  String 
+  underPlace Place[] @relation("directory")
+  abovePlace Place @relation("directory",fields: [id],references:[id])
+  files File[]  @relation("directory")
+}
+
+
+model File{
+  id Int @id @unique @default(sequence())
+  placeId Int
+  abovePlace Place @relation("directory",fields: [placeId], references: [id])
+  accessIdList  Int[]
+
+  name String
+  size Int
+  ext  String
+  url  String 
+  uploadedAt DateTime @default(now())
+}
