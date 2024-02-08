@@ -7,9 +7,50 @@
 <br>
 <h1>:collision:PLACE IS OPEN SOURCE FILE SHARING STORAGE</h1></b>
 <br>PLACE allows users to store files in the cloud, synchronize files across devices, and share files.<br>
+ You can set up by yourself OR get our help<br>
+I <b>believe</b> that Place will become the best easily scalable storage and media trading facility.<br>
+As well as a project for training soft, design, programming skills.<br>
 <b>Feel free to send a pull request or create a issue!</b>
 
 <br><br>
+<h2>Getting started</h2>
+
+Setup [git](https://git-scm.com/downloads)
+<br>
+[Clone](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository) repository<br>
+Go to back-end directory:<br>
+`cd server`
+<h3>Using Docker Compose</h3>
+
+Setup [Docker](https://docs.docker.com/engine/install) and [Docker Compose](https://docs.docker.com/compose/install) <br>
+
+```docker
+docker-compose build
+docker-compose run 
+```
+<h3>Locally</h3>
+
+Setup [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)<br>
+Execute in terminal:<br>
+
+Setup nestjs/cli:<br>
+`npm i -g @nestjs/cli`<br>
+Install all dependencies:<br>
+`npm i`
+
+Setup [CockroachDB](https://www.cockroachlabs.com/docs/v23.2/install-cockroachdb-linux)<br>
+Open a new terminal:<br>
+`cockroach start-single-node --insecure`
+
+Setup [minio](https://min.io/docs/minio/linux/operations/installation.html)<br>
+Open a new terminal:<br>
+
+```cd server
+minio start server
+```
+And finally:<br>
+`npm run start:dev`
+
 <h2>Discription of development a HA Contract service </h2>
 <h2>Formulation of the task:</h2>
 <p>Build of a high-load failover service for concluding media contracts between users. </p>
@@ -64,7 +105,7 @@ It's no start-up, so i needn't.
 <li>✅ Describe a requirements</li>
 <li>✅ Describe a Architecture with Tech-stack</li>
 <li>✅ Introduce a server part of project</li>
-<li>Describe a Code-of-Conduct</li>
+<li>✅ Describe a Code-of-Conduct</li>
 <li>Describe User-flow</li>
 <li>Introduce a front-end part of project</li>
 <li>Do a MVP</li>
