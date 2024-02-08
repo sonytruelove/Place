@@ -2,7 +2,7 @@
 
 Thank you for considering contributing to our project. It is individuals like yourself who truly enhance the value of our project 💓. 
 
-While we are continuously working on improving the ease and transparency of contributing to this project, there are still a few areas that require refinement:raised_hands:.
+While we are continuously working on improving the ease and transparency of contributing to this project, there are still a few areas that require refinement :raised_hands:.
 
 Following these guidelines is crucial as it portrays your respect for the time and efforts invested by our dedicated team of developers in managing and enhancing this open-source project.
 In return, we assure you that our developers will reciprocate your respect by addressing your concerns, assessing any modifications, and assisting you in finalizing your pull requests.
