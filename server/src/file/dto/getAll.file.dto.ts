@@ -2,14 +2,14 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class getAllFilesDTO {
   @ApiProperty()
-  name:   string;
+  name: string;
 
   @ApiProperty()
-  size:   number;
+  size: number;
 
   @ApiProperty()
-  ext:    string;
+  ext: string;
 
   @ApiProperty()
-  url:    string;
+  url: string;
 }

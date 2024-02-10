@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  InternalServerErrorException,
+  Patch,
+  UseGuards
+} from "@nestjs/common";
 import { ApiOkResponse } from '@nestjs/swagger';
 import { AccountDTO } from './dto/account.dto';
 import { PatchAccountDTO } from './dto/patchAccount.dto';

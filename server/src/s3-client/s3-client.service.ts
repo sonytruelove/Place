@@ -2,7 +2,10 @@ import {
   Injectable,
   Logger,
   HttpException,
-  HttpStatus} from '@nestjs/common';
+  HttpStatus,
+  InternalServerErrorException,
+  BadRequestException,
+} from "@nestjs/common";
 import { MinioService } from 'nestjs-minio-client';
 import { config } from './config';
 @Injectable()
@@ -20,11 +23,22 @@ export class S3Service {
   }
 
   public async createBucket(accountId: string) {
-    this.client.makeBucket(accountId);
+    if (!(await this.isBucketExist(accountId))) {
+      await this.client.makeBucket(accountId);
+      return true;
+    }
+    return false;
   }
 
   public async isBucketExist(accountBucket: string): Promise<boolean> {
     return await this.client.bucketExists(accountBucket.toString());
+  }
+
+  public async create(
+    accountId: string = this.accountBucket,
+    placeName: string,
+  ) {
+    this.client.putObject(accountId, placeName + "/", "");
   }
 
   public async upload(
@@ -48,10 +62,10 @@ export class S3Service {
       metaData,
       function (err) {
         if (err) {
-         throw new HttpException(
-          'Error uploading file: ' + err.message,
-          HttpStatus.BAD_REQUEST,
-        );
+          throw new HttpException(
+            "Error uploading file: " + err.message,
+            HttpStatus.BAD_REQUEST,
+          );
         }
       },
     );
@@ -61,10 +75,10 @@ export class S3Service {
   async delete(objectName: string, accountBucket: string = this.accountBucket) {
     this.client.removeObject(accountBucket, objectName, function (err) {
       if (err) {
-       throw new HttpException(
-        'Oops Something wrong happend',
-        HttpStatus.BAD_REQUEST,
-      );
+        throw new HttpException(
+          "Oops Something wrong happend",
+          HttpStatus.BAD_REQUEST,
+        );
       }
     });
   }

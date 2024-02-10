@@ -18,7 +18,7 @@ export function UploadFiles() {
               format: 'binary',
             }
           }
-        },
+        }
       }
     }),
   );

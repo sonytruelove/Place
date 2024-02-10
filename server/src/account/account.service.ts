@@ -11,6 +11,7 @@ export class AccountService {
         ownerId: user.id,
         places: {
           create: {
+            name: "",
             url: '',
           }
         }
@@ -33,10 +34,11 @@ export class AccountService {
   }
 
   async getAccount(accountId: number) {
-    return this.db.account.findUniqueOrThrow({
+    const account = this.db.account.findUniqueOrThrow({
       where: { id: accountId },
       include: { places: true },
     });
+    return account;
   }
 
   async patchAccount(userId: number, patch: PatchAccountDTO) {

@@ -35,22 +35,23 @@ export class FileService {
     }
     if (!place) {
       throw new BadRequestException({
-      type: 'No place with such ID or access for your account',
-    });
+        type: "No place with such ID or access for your account",
+      });
     }
     if (!fileRes.length) throw new BadRequestException({ type: 'No files' });
     try {
-      const isBucketExist = await this.S3Service.isBucketExist(accountId.toString(),
+      const isBucketExist = await this.S3Service.isBucketExist(
+        accountId.toString(),
       );
       if (!isBucketExist) throw new BadRequestException({ type: "The Bucket doesn't exist" });
       fileRes.forEach(async (element) => {
         if (place.url == '') await this.S3Service.upload(element, '', place.ownerId.toString());
         else {
-         await this.S3Service.upload(
-          element,
-          place.url + '/',
-          place.ownerId.toString(),
-        );
+          await this.S3Service.upload(
+            element,
+            place.url + "/",
+            place.ownerId.toString(),
+          );
         }
         const newFile = await this.db.file.create({
           data: {
@@ -128,30 +129,32 @@ export class FileService {
     try {
       let account;
       if (!placeId) {
-       account = await this.db.account.findUniqueOrThrow({
-        where: { id: Number(accountId) },
-        include: {
-          places: {
-            include: {
-              files: {
-                where: { name: filename },
+        account = await this.db.account.findUniqueOrThrow({
+          where: { id: Number(accountId) },
+          include: {
+            places: {
+              include: {
+                files: {
+                  where: { name: filename },
+                },
               },
+            }
+          }
+        });
+      } else {
+        account = await this.db.account.findUniqueOrThrow({
+          where: { id: Number(accountId) },
+          include: {
+            places: {
+              where: { id: Number(placeId) },
+              include: {
+                files: {
+                  where: { name: filename },
+                },
+              }
             },
-          },
-        },
-      }); } else { account = await this.db.account.findUniqueOrThrow({
-        where: { id: Number(accountId) },
-        include: {
-          places: {
-            where: { id: Number(placeId) },
-            include: {
-              files: {
-                where: { name: filename },
-              },
-            },
-          },
-        },
-      });
+          }
+        });
       }
 
       const place = account.places[0];

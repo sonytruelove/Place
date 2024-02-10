@@ -9,7 +9,7 @@ export class GetSessionDTO {
   email: string;
 
   @ApiProperty()
-  'iat': number;
+  "iat": number;
 
   @ApiProperty()
   'exp': number;

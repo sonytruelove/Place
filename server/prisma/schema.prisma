@@ -31,11 +31,13 @@ model Account{
 model Place {
   id Int @id @default(sequence())
   ownerId Int  @unique
+  abovePlaceId Int?  @unique
   owner   Account @relation(fields: [ownerId], references: [id])
   accessIdList  Int[]
-  url  String 
+  name String?
+  url  String? 
   underPlace Place[] @relation("directory")
-  abovePlace Place @relation("directory",fields: [id],references:[id])
+  abovePlace Place? @relation("directory",fields: [abovePlaceId],references:[id])
   files File[]  @relation("directory")
 }
 
