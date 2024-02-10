@@ -19,7 +19,8 @@ Setup [git](https://git-scm.com/downloads)
 <br>
 [Clone](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository) repository<br>
 Go to back-end directory:<br>
-`cd server`
+`cd server` <br>
+Rename "production.env" to ".env"(Also change data in s3 config and env if you want to work with Place)
 <h3>Using Docker Compose</h3>
 
 Setup [Docker](https://docs.docker.com/engine/install) and [Docker Compose](https://docs.docker.com/compose/install) <br>
