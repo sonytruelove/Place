@@ -4,5 +4,8 @@ export class CreatePlaceDTO {
   @ApiProperty({
     example: 'My place',
   })
-  placename: string;
+  placeName: string;
+  
+  @ApiProperty()
+  abovePlaceId: number;
 }

@@ -181,19 +181,18 @@ export class FileService {
 
   async deleteFile(sessionId: number, id: number): Promise<string> {
     try {
-      const place = await this.db.place.findUniqueOrThrow({
+      const place = await this.db.place.findFirst({
         where: { ownerId: Number(sessionId) },
         include: {
           files: { where: { id: Number(id) } }
         }
       });
+      if (!place) return 'No such file or forbidden';
       const file = place.files[0];
-      if (file) {
+      if (!file) return 'No such file or forbidden';
         await this.db.file.delete({ where: { id: Number(id) } });
         await this.S3Service.delete(file.name, sessionId.toString());
         return 'Successfuly deleted: ' + file.name;
-      }
-      return 'No such file or forbidden';
     } catch (err) {
       return err;
     }

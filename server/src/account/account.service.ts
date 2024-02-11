@@ -23,6 +23,7 @@ export class AccountService {
     await this.db.place.update({
       where: {
         ownerId: newAccount.id,
+        abovePlaceId: undefined,
         url: '',
       },
       data: {

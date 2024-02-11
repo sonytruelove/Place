@@ -30,7 +30,7 @@ model Account{
 
 model Place {
   id Int @id @default(sequence())
-  ownerId Int  @unique
+  ownerId Int  
   abovePlaceId Int?  @unique
   owner   Account @relation(fields: [ownerId], references: [id])
   accessIdList  Int[]
