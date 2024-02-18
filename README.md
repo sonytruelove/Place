@@ -1,5 +1,5 @@
 
-# PLACE
+<h1 align="center">PLACE</h1>
 
   <div class="container" align="center">
   <img src="https://github.com/sonytruelove/HA-Contract-service/assets/42536061/c0fe90ba-e092-437f-a7d3-7117bb9c0805" height=400em alt="PLACE LOGO">
@@ -53,21 +53,20 @@ minio start server
 And finally:<br>
 `npm run start:dev`
 
-<h2>Discription of development a HA Contract service </h2>
+<h2>Discription of Place development </h2>
 <h2>Formulation of the task:</h2>
-<p>Build of a high-load failover service for concluding media contracts between users. </p>
+<p>Build of a high-load easily scalable service for concluding media contracts between users, file storage and transfer. </p>
 <p>Include a own currency, subscription</p>
 <h3><span>Requirements:</span></h3>
 Front-end:
 <ul>
   <li>Fast, Simple, Presentable</li>
   <li>Solves real problems</li>
-  <li>Presentable</li>
 </ul>
 Source:
   <ul>
   <li>Optimized</li>
-  <li>Compliance with object-oriented programming concepts and paradigms</li>
+  <li>Compliance with object-oriented programming patterns and paradigms</li>
   <li>Testing</li>
 </ul>
 Back-end:
@@ -75,10 +74,11 @@ Back-end:
   <li>Stand like a million requests in one time</li>
   <li>Minimize failures</li>
   <li>Scalable architecture</li>
-  <li>Server may crash</li>
+  <li>One of the servers may fail - work will continue</li>
   <li>All users must receive contracts</li>
 </ul>
 <h2>User Flow</h2>
+<img width="4236" alt="User flow" src="https://github.com/sonytruelove/Place/assets/42536061/97ef000c-3258-4142-b37a-98b68a7a46e9">
 <h2>Architecture and Tech Stack(previously)</h2>
 
 ![Architecture](https://github.com/sonytruelove/HA-Contract-service/assets/42536061/94e367de-20e1-4f92-88f1-d445de710e9f)
@@ -121,6 +121,6 @@ Also Prisma ORM doesn't work with Tarantool DB.
 <p>
 So, Cockroach DB processing all data and Tarantool DB remove from project for now.
 </p>
-<h3>Place is free for other contributors to make project better</h3>
+<h3>Place is free for all contributors who want to make project better</h3>
 I considered it necessary to have experience in maintain an open source project, as well as to see new ways to develop this project.
 
