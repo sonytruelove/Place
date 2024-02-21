@@ -4,6 +4,11 @@
   <div class="container" align="center">
   <img src="https://github.com/sonytruelove/HA-Contract-service/assets/42536061/c0fe90ba-e092-437f-a7d3-7117bb9c0805" height=400em alt="PLACE LOGO">
   </div>
+  <div align="center" >
+    
+<span>[EN](https://github.com/sonytruelove/Place/blob/main/README.md)</span>  <span>[RU](https://github.com/sonytruelove/Place/blob/main/README_ru.md)</span> <span>[CN](https://github.com/sonytruelove/Place/blob/main/README_cn.md)</span>
+  </div>
+  
 <br>
 <h1>:collision:PLACE IS OPEN SOURCE FILE SHARING STORAGE</h1></b>
 <br>PLACE allows users to store files in the cloud, synchronize files across devices, and share files.<br>
