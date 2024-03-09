@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <title>Place</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-line">
+                <div class="left">
+                    <div class="header-logo"> 
+                        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="48" height="48">
+                            <title>ep_place(1)-svg</title>
+                            <defs>
+                                <clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+                                    <path d="m0 0h1200v1200h-1200z"/>
+                                </clipPath>
+                            </defs>
+                            <style>
+                                .s0 { fill: #588af5 } 
+                            </style>
+                            <g id="Clip-Path" clip-path="url(#cp1)">
+                                <g id="Layer">
+                                    <path id="Layer" fill-rule="evenodd" class="s0" d="m598.9 1025.3c-79.5 0-155.8-31.6-212.1-87.9-56.2-56.3-87.9-132.6-87.9-212.1 0-79.6 31.7-155.9 87.9-212.2 56.3-56.2 132.6-87.8 212.1-87.8 79.6 0 155.9 31.6 212.2 87.8 56.2 56.3 87.8 132.6 87.8 212.2 0 79.5-31.6 155.8-87.8 212.1-56.3 56.3-132.6 87.9-212.2 87.9zm0-75c59.7 0 117-23.7 159.1-65.9 42.2-42.2 65.9-99.5 65.9-159.1 0-59.7-23.7-116.9-65.9-159.1-42.1-42.2-99.4-65.9-159.1-65.9-59.6 0-116.9 23.7-159.1 65.9-42.1 42.2-65.9 99.4-65.9 159.1 0 59.6 23.8 116.9 65.9 159.1 42.2 42.2 99.5 65.9 159.1 65.9z"/>
+                                    <path id="Layer" class="s0" d="m189.1 913.7c9.9 0 19.5 3.9 26.5 11 7 7 11 16.5 11 26.5v300c0 9.9-4 19.5-11 26.5-7 7-16.6 11-26.5 11-10 0-19.5-4-26.5-11-7.1-7-11-16.6-11-26.5v-300c0-10 3.9-19.5 11-26.5 7-7.1 16.5-11 26.5-11z"/>
+                                    <path id="Layer" class="s0" d="m1050 937.5c0 103.5-201.5 187.5-450 187.5-248.6 0-450-84-450-187.5 0-81.7 300-100.7 300-100.7-133.9 21.4-225 67.8-225 100.7 0 44.2 163.9 112.5 375 112.5 211 0 375-68.3 375-112.5 0-33-91.1-79.3-225-100.7 0 0 300 19.1 300 100.7z"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <span>Place</span>
+                    </div>
+                    <nav>
+                    <a href="#overview" class="active" onclick="changeActive(event)">Overview</a>
+                    <a href="#features" onclick="changeActive(event)">Features</a>
+                    </nav>
+                </div>
+                <div class="right">
+                    <a href="http://github.com/sonytruelove/Place">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C10.6868 2 9.38642 2.25866 8.17317 2.7612C6.95991 3.26375 5.85752 4.00035 4.92893 4.92893C3.05357 6.8043 2 9.34784 2 12C2 16.42 4.87 20.17 8.84 21.5C9.34 21.58 9.5 21.27 9.5 21V19.31C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.5 18.45 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26V21C14.5 21.27 14.66 21.59 15.17 21.5C19.14 20.16 22 16.42 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2Z" fill="black"/>
+                        </svg>    
+                    </a>                
+                    <a class="alt-button">Start</a>
+                    <a class="button">Try Place for Work</a>
+                </div>
+            </div>
+            <div class="hero-wrapper" id="overview">
+                <div class="hero-content">
+                    <h1>Easy and secure
+                        access to your
+                        content</h1>
+                        <p>Store, share and control access to files and places from your mobile device, tablet or computer</p>
+                        <div class="hero-buttons">
+                            <a class="button">Try Place for Work</a>
+                            <a class="alt-button">Start</a>
+                        </div>
+                </div>
+                <img  src="images/hero image.svg" alt="view">
+            </div>
+            <div class="see-more">
+                <a href="#features">See what you can do with Place</a>
+                    <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                        <g clip-path="url(#clip0_1_1321)">
+                        <path d="M7.7426 9.48749L5.9801 11.25L15.9801 21.25L25.9801 11.25L24.2176 9.48749L15.9801 17.7125" fill="#5F6368"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_1_1321">
+                        <rect width="30" height="30" fill="white" transform="translate(0.980103)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+            </div>
+        </div>
+    </header>
+    <div class="container" id="features">
+        <div class="features-wrapper imgleft">
+            <div class="features-content">
+                <h2>Access manage</h2>
+                    <span>Organize access to files</span> 
+                    <ul>
+                       <li> For specific users</li>
+                       <li> By roles</li>
+                       <li> Everyone</li>
+                    </ul>
+            </div>
+                <img  src="images/bestman.svg" alt="access manage example">
+        </div>
+        <div class="features-wrapper">
+            <div class="features-content">
+                <h2>Built-in protections against
+                    malware, spam, and
+                    ransomware</h2>
+                    <p>Place can provide secure access to your files. <br>
+                        Files shared with you can be proactively scanned and
+                        removed when malware, spam, ransomware, or phishing is
+                        detected. <br>
+                        And Place is cloud-native, which eliminates the
+                        need for local files and can minimize risk to your devices.</p> 
+            </div>
+                <img class="danger-img" src="images/danger message.svg" alt="danger message on view">
+        </div>
+        <div class="features-wrapper imgleft nomargin">
+            <div class="features-content">
+                <h2>Trade module (in future) </h2>
+                    <span>Place<small>Share</small> offers a Trade Module for inclusion in the application, allowing you to create exchange offers</span>
+                    <ul>
+                        <li>Files per file</li>
+                        <li>Files for currency</li>
+                        <li>Places to places</li>
+                        <li>Places for currency</li>
+                    </ul>
+            </div>
+                <img class="trade-img" src="images/trade between users.svg" alt="trade between users">
+        </div>
+        <div class="features-wrapper">
+            <div class="features-content">
+                <h2>Create a Place with unique URL. </h2>
+                    <p>Create user-friendly URLs for your people.<br>
+                        Create Places and files with the same names.<br>
+                        Don't overthink about naming</p>
+            </div>
+                <img src="images/unique url.svg" alt="unique url">
+        </div>
+        <div class="get-started" id="get-started">
+            <h2>Ready to get started?</h2>
+            <div class="get-started-buttons">
+                <a class="button">Try Place for Work</a>
+                <a class="alt-button">Start</a>
+            </div>
+        </div>
+        <div class="contribute" id="contribute">
+            <h2>Contribute to the development of the project!</h2>
+            <a href="http://github.com/sonytruelove/Place">
+            <img src="images/github.svg" alt="github icon">
+            </a>
+        </div>
+
+    </div>
+
+</body>
+<script>
+function changeActive(e) {
+  var element = document.getElementsByClassName("active")[0];
+  element.classList.remove("active");
+  e.target.classList.toggle("active");
+} 
+</script>
+</html>
