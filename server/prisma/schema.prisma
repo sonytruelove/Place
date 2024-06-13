@@ -24,14 +24,16 @@ model Account{
   id      Int @id @default(sequence(minValue: 100,start: 100))
   ownerId Int @unique
   owner   User @relation(fields: [ownerId], references: [id])
+  uniqueQuota Int @default(1)
   
   places Place[]
+  uniquePlaces UniquePlace[]
 }
 
 model Place {
   id Int @id @default(sequence())
   ownerId Int  
-  abovePlaceId Int?  @unique
+  abovePlaceId Int?  
   owner   Account @relation(fields: [ownerId], references: [id])
   accessIdList  Int[]
   name String?
@@ -41,11 +43,23 @@ model Place {
   files File[]  @relation("directory")
 }
 
+model UniquePlace {
+  id Int @id @default(sequence())
+  ownerId Int  
+  owner   Account @relation(fields: [ownerId], references: [id])
+  accessIdList  Int[] 
+  name String? @unique
+  url  String? @unique
+  files File[]  @relation("directory")
+}
+
 
 model File{
   id Int @id @unique @default(sequence())
   placeId Int
-  abovePlace Place @relation("directory",fields: [placeId], references: [id])
+  abovePlace Place? @relation("directory",fields: [placeId],references: [id],map: "place_fk")
+  aboveUniquePlace UniquePlace? @relation("directory",fields: [placeId],references: [id],map: "unique_place_fk")
+ 
   accessIdList  Int[]
 
   name String

@@ -1,11 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreatePlaceDTO {
+export class CreateUniquePlaceDTO {
   @ApiProperty({
     example: 'My place',
   })
   placeName: string;
-
-  @ApiProperty()
-  abovePlaceId: number;
 }

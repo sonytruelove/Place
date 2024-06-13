@@ -1,7 +1,7 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { DBService } from 'src/db/db.service';
-import { S3Service } from '../s3-client/s3-client.service';
-import { PlaceDTO } from './dto/place.dto';
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { DBService } from "src/db/db.service";
+import { S3Service } from "../s3-client/s3-client.service";
+import { PlaceDTO } from "./dto/place.dto";
 @Injectable()
 export class PlaceService {
   constructor(
@@ -18,14 +18,13 @@ export class PlaceService {
       const account = await this.db.account.findUniqueOrThrow({
         where: { id: Number(accountId) },
         include: {
-          places: { where: { id: Number(abovePlaceId) } },
+          places: { where: { id: Number(abovePlaceId) } }
         },
       });
       const isBucketExist = await this.S3Service.isBucketExist(
         accountId.toString(),
       );
-      if (!isBucketExist)
-        throw new BadRequestException({ type: "The Bucket doesn't exist" });
+      if (!isBucketExist) throw new BadRequestException({ type: "The Bucket doesn't exist" });
       const abovePlace = account.places[0];
       await this.S3Service.create(accountId.toString(), placeName);
 
@@ -35,15 +34,54 @@ export class PlaceService {
           accessIdList: [accountId],
           abovePlaceId: abovePlaceId,
           name: placeName,
-          url: abovePlace.url + "/" + placeName,
+          url: abovePlace.url + '/' + placeName
         }
       });
-      return "Place succesffuly created";
+      return 'Place succesffuly created';
     } catch (err) {
       console.log(err);
-      throw new BadRequestException({type:err});
+      throw new BadRequestException({ type: err });
     }
   }
+
+  async createUnique(accountId: number, placeName: string): Promise<string> {
+    try {
+      const isNameTaken = await this.db.uniquePlace.findFirst({
+        where: { name: placeName },
+      });
+      if (isNameTaken) throw new BadRequestException({
+          type: "This place name used up already",})
+
+      const isBucketExist = await this.S3Service.isBucketExist(
+        accountId.toString(),
+      );
+      const account = await this.db.account.findMany({
+        where: { id: Number(accountId) },
+        include: {
+          uniquePlaces: { where: { ownerId: Number(accountId) } },
+        }
+      });
+      if (account[0].uniquePlaces.length >= account[0].uniqueQuota) throw new BadRequestException({
+          type: "Number of available unique places used up",
+        });
+      if (!isBucketExist) throw new BadRequestException({ type: "The Bucket doesn't exist" });
+      await this.S3Service.create(accountId.toString(), placeName);
+
+      const newPlace = await this.db.uniquePlace.create({
+        data: {
+          ownerId: accountId,
+          accessIdList: [accountId],
+          name: placeName,
+          url: placeName
+        }
+      });
+      return 'Unique Place successfully created';
+    } catch (err) {
+      console.log(err);
+      throw new BadRequestException({ type: err });
+    }
+  }
+
   async getOne(
     accountId: number,
     placeId: number,
@@ -60,7 +98,6 @@ export class PlaceService {
   });
       if(place&&place.accessIdList.includes(Number(accountId)))
         return place;
-      else
-        throw new BadRequestException({type:"No such place or forbidden"});
+      throw new BadRequestException({type:"No such place or forbidden"});
   }
 }

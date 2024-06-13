@@ -6,10 +6,12 @@ import { UsersModule } from './users/users.module';
 import { AccountModule } from './account/account.module';
 import { S3ClientModule } from './s3-client/s3-client.module';
 import { PlaceModule } from './place/place.module';
+import { UniquePlaceModule } from './unique-place/unique-place.module';
 
 @Module({
   imports: [
     PlaceModule,
+    UniquePlaceModule,
     FileModule,
     DBModule,
     AuthModule,

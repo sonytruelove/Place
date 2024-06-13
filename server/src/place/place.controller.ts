@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards
+} from "@nestjs/common";
 import { AuthGuard } from 'src/auth/auth.guard';
 import { GetSessionDTO } from 'src/auth/dto/getSession.dto';
 import { SessionInfo } from 'src/auth/session-info.decorator';
@@ -25,15 +33,12 @@ export class PlaceController {
     );
   }
 
-  @Get(':id')
+  @Get(":id")
   @UseGuards(AuthGuard)
   async getOne(
     @Param("id") placeId: number,
     @SessionInfo() session: GetSessionDTO,
   ): Promise<PlaceDTO> {
-    return await this.placeService.getOne(
-      session.id,
-      placeId
-    );
+    return await this.placeService.getOne(session.id, placeId);
   }
 }

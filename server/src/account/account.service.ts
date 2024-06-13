@@ -9,6 +9,7 @@ export class AccountService {
     const newAccount = await this.db.account.create({
       data: {
         ownerId: user.id,
+        uniqueQuota: 1,
         places: {
           create: {
             name: "",
@@ -22,6 +23,7 @@ export class AccountService {
 
     await this.db.place.update({
       where: {
+        id: newAccount.places[0].id,
         ownerId: newAccount.id,
         abovePlaceId: undefined,
         url: '',

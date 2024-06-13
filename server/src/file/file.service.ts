@@ -139,7 +139,7 @@ export class FileService {
                 },
               },
             }
-          }
+          },
         });
       } else {
         account = await this.db.account.findUniqueOrThrow({
@@ -153,7 +153,7 @@ export class FileService {
                 },
               }
             },
-          }
+          },
         });
       }
 
@@ -190,9 +190,9 @@ export class FileService {
       if (!place) return 'No such file or forbidden';
       const file = place.files[0];
       if (!file) return 'No such file or forbidden';
-        await this.db.file.delete({ where: { id: Number(id) } });
-        await this.S3Service.delete(file.name, sessionId.toString());
-        return 'Successfuly deleted: ' + file.name;
+      await this.db.file.delete({ where: { id: Number(id) } });
+      await this.S3Service.delete(file.name, sessionId.toString());
+      return "Successfuly deleted: " + file.name;
     } catch (err) {
       return err;
     }
