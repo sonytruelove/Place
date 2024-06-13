@@ -48,7 +48,7 @@ docker-compose run
 在新終端機中：<br>
 
 ```cd server
-minio start server
+minio server start
 ```
 最後：<br>
 `npm run start:dev`

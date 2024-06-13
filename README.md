@@ -53,7 +53,7 @@ Setup [minio](https://min.io/docs/minio/linux/operations/installation.html)<br>
 Open a new terminal:<br>
 
 ```cd server
-minio start server
+minio server start
 ```
 And finally:<br>
 `npm run start:dev`

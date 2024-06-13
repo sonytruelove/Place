@@ -48,7 +48,7 @@ docker-compose run
 В новом терминале:<br>
 
 ```cd server
-minio start server
+minio server start
 ```
 Наконец:<br>
 `npm run start:dev`
