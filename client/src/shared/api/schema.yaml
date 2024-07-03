@@ -1,0 +1,355 @@
+openapi: 3.0.0
+paths:
+  /places:
+    post:
+      operationId: PlaceController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlaceDTO'
+      responses:
+        '201':
+          description: ''
+  /places/{id}:
+    get:
+      operationId: PlaceController_getOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+  /uniqueplaces:
+    post:
+      operationId: UniquePlaceController_createUnique
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUniquePlaceDTO'
+      responses:
+        '201':
+          description: ''
+  /files:
+    post:
+      operationId: FileController_upload
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                placeid:
+                  type: number
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: ''
+    get:
+      operationId: FileController_getAllInPlace
+      parameters:
+        - name: placeid
+          required: true
+          in: query
+          schema:
+            type: number
+        - name: count
+          required: true
+          in: query
+          schema:
+            type: number
+        - name: offset
+          required: true
+          in: query
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDTO'
+  /files/search:
+    get:
+      operationId: FileController_search
+      parameters:
+        - name: query
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDTO'
+  /files/{id}:
+    get:
+      operationId: FileController_getOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDTO'
+    delete:
+      operationId: FileController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: number
+  /files/url/{accountid}/{placeid}/{filename}:
+    get:
+      operationId: FileController_getUrlFromCurrentPlace
+      parameters:
+        - name: accountid
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: placeid
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: filename
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/downloadFileDTO'
+  /files/url/{accountid}/{filename}:
+    get:
+      operationId: FileController_getUrlFromUser
+      parameters:
+        - name: accountid
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: filename
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/downloadFileDTO'
+  /auth/sign-in:
+    post:
+      operationId: AuthController_signIn
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInDTO'
+      responses:
+        '200':
+          description: ''
+  /auth/sign-up:
+    post:
+      operationId: AuthController_signUp
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpDTO'
+      responses:
+        '201':
+          description: ''
+  /auth/sign-out:
+    post:
+      operationId: AuthController_signOut
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /auth/session:
+    get:
+      operationId: AuthController_getSession
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionDTO'
+  /account:
+    get:
+      operationId: AccountController_getAccount
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDTO'
+    patch:
+      operationId: AccountController_patchAccount
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAccountDTO'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchAccountDTO'
+info:
+  title: File Place
+  description: ''
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreatePlaceDTO:
+      type: object
+      properties:
+        placeName:
+          type: string
+          example: My place
+        abovePlaceId:
+          type: number
+      required:
+        - placeName
+        - abovePlaceId
+    CreateUniquePlaceDTO:
+      type: object
+      properties:
+        placeName:
+          type: string
+          example: My place
+      required:
+        - placeName
+    FileDTO:
+      type: object
+      properties: {}
+    downloadFileDTO:
+      type: object
+      properties:
+        url:
+          type: string
+      required:
+        - url
+    SignInDTO:
+      type: object
+      properties:
+        email:
+          type: string
+          example: CoolMan@gmail.com
+        password:
+          type: string
+      required:
+        - email
+        - password
+    SignUpDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: CoolMan
+        email:
+          type: string
+          example: CoolMan@gmail.com
+        password:
+          type: string
+      required:
+        - name
+        - email
+        - password
+    GetSessionDTO:
+      type: object
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+        iat:
+          type: number
+        exp:
+          type: number
+      required:
+        - id
+        - email
+        - iat
+        - exp
+    AccountDTO:
+      type: object
+      properties:
+        id:
+          type: number
+        ownerId:
+          type: number
+        places:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - ownerId
+        - places
+    PatchAccountDTO:
+      type: object
+      properties:
+        places:
+          type: array
+          items:
+            type: string
+      required:
+        - places
