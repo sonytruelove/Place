@@ -114,6 +114,8 @@ It's no start-up, so i needn't.
 <li>✅ Introduce a server part of project</li>
 <li>✅ Describe a Code-of-Conduct</li>
 <li>✅ Describe User-flow</li>
+<li>Develop UI kit</li>
+<li>Develop Design system</li>
 <li>Introduce a front-end part of project</li>
 <li>Do a MVP</li>
 <li>...</li>

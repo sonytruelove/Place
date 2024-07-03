@@ -109,6 +109,8 @@ Next.js, Typescript, Webpack
 <li>✅ 介紹專案的伺服器部分</li>
 <li>✅ 描述行為準則</li>
 <li>✅ 設計自訂路徑</li>
+<li>开发 UI 套件</li>
+<li>开发设计系统</li>
 <li>介紹專案的客戶端部分</li>
 <li>獲得 MVP</li>
 <li>...</li>
