@@ -4,9 +4,8 @@
  * File Place
  * OpenAPI spec version: 1.0.0
  */
-import { createInstance } from "../../shared/api/api-instance";
-import type { BodyType } from "../../shared/api/api-instance";
-
+import { createInstance } from "./api-instance";
+import type { BodyType } from "./api-instance";
 export type FileControllerSearchParams = {
   query: string;
 };
@@ -72,8 +71,8 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 export const placeControllerCreate = (
   createPlaceDTO: BodyType<CreatePlaceDTO>,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<void>(
+) => {
+  return createInstance<void>(
     {
       url: `/places`,
       method: "POST",
@@ -82,17 +81,20 @@ export const placeControllerCreate = (
     },
     options,
   );
+};
 
 export const placeControllerGetOne = (
   id: number,
   options?: SecondParameter<typeof createInstance>,
-) => createInstance<void>({ url: `/places/${id}`, method: "GET" }, options);
+) => {
+  return createInstance<void>({ url: `/places/${id}`, method: "GET" }, options);
+};
 
 export const uniquePlaceControllerCreateUnique = (
   createUniquePlaceDTO: BodyType<CreateUniquePlaceDTO>,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<void>(
+) => {
+  return createInstance<void>(
     {
       url: `/uniqueplaces`,
       method: "POST",
@@ -101,6 +103,7 @@ export const uniquePlaceControllerCreateUnique = (
     },
     options,
   );
+};
 
 export const fileControllerUpload = (
   fileControllerUploadBody: BodyType<FileControllerUploadBody>,
@@ -130,53 +133,71 @@ export const fileControllerUpload = (
 export const fileControllerGetAllInPlace = (
   params: FileControllerGetAllInPlaceParams,
   options?: SecondParameter<typeof createInstance>,
-) => createInstance<FileDTO>({ url: `/files`, method: "GET", params }, options);
+) => {
+  return createInstance<FileDTO>(
+    { url: `/files`, method: "GET", params },
+    options,
+  );
+};
 
 export const fileControllerSearch = (
   params: FileControllerSearchParams,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<FileDTO>(
+) => {
+  return createInstance<FileDTO>(
     { url: `/files/search`, method: "GET", params },
     options,
   );
+};
 
 export const fileControllerGetOne = (
   id: number,
   options?: SecondParameter<typeof createInstance>,
-) => createInstance<FileDTO>({ url: `/files/${id}`, method: "GET" }, options);
+) => {
+  return createInstance<FileDTO>(
+    { url: `/files/${id}`, method: "GET" },
+    options,
+  );
+};
 
 export const fileControllerDelete = (
   id: number,
   options?: SecondParameter<typeof createInstance>,
-) => createInstance<number>({ url: `/files/${id}`, method: "DELETE" }, options);
+) => {
+  return createInstance<number>(
+    { url: `/files/${id}`, method: "DELETE" },
+    options,
+  );
+};
 
 export const fileControllerGetUrlFromCurrentPlace = (
   accountid: number,
   placeid: number,
   filename: string,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<DownloadFileDTO>(
+) => {
+  return createInstance<DownloadFileDTO>(
     { url: `/files/url/${accountid}/${placeid}/${filename}`, method: "GET" },
     options,
   );
+};
 
 export const fileControllerGetUrlFromUser = (
   accountid: number,
   filename: string,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<DownloadFileDTO>(
+) => {
+  return createInstance<DownloadFileDTO>(
     { url: `/files/url/${accountid}/${filename}`, method: "GET" },
     options,
   );
+};
 
 export const authControllerSignIn = (
   signInDTO: BodyType<SignInDTO>,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<void>(
+) => {
+  return createInstance<void>(
     {
       url: `/auth/sign-in`,
       method: "POST",
@@ -185,12 +206,13 @@ export const authControllerSignIn = (
     },
     options,
   );
+};
 
 export const authControllerSignUp = (
   signUpDTO: BodyType<SignUpDTO>,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<void>(
+) => {
+  return createInstance<void>(
     {
       url: `/auth/sign-up`,
       method: "POST",
@@ -199,28 +221,40 @@ export const authControllerSignUp = (
     },
     options,
   );
+};
 
 export const authControllerSignOut = (
   options?: SecondParameter<typeof createInstance>,
-) => createInstance<void>({ url: `/auth/sign-out`, method: "POST" }, options);
+) => {
+  return createInstance<void>(
+    { url: `/auth/sign-out`, method: "POST" },
+    options,
+  );
+};
 
 export const authControllerGetSession = (
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<GetSessionDTO>(
+) => {
+  return createInstance<GetSessionDTO>(
     { url: `/auth/session`, method: "GET" },
     options,
   );
+};
 
 export const accountControllerGetAccount = (
   options?: SecondParameter<typeof createInstance>,
-) => createInstance<AccountDTO>({ url: `/account`, method: "GET" }, options);
+) => {
+  return createInstance<AccountDTO>(
+    { url: `/account`, method: "GET" },
+    options,
+  );
+};
 
 export const accountControllerPatchAccount = (
   patchAccountDTO: BodyType<PatchAccountDTO>,
   options?: SecondParameter<typeof createInstance>,
-) =>
-  createInstance<PatchAccountDTO>(
+) => {
+  return createInstance<PatchAccountDTO>(
     {
       url: `/account`,
       method: "PATCH",
@@ -229,6 +263,7 @@ export const accountControllerPatchAccount = (
     },
     options,
   );
+};
 
 export type PlaceControllerCreateResult = NonNullable<
   Awaited<ReturnType<typeof placeControllerCreate>>
