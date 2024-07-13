@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-export type UILinkProps = {} & Parameters<typeof Link>[0]
+export type UILinkProps = {} & Parameters<typeof Link>[0];
 
 export function UILink({ className, ...props }: UILinkProps) {
   return (

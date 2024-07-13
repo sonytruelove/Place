@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { UiLogo } from "./ui-logo";
 import { ReactNode } from "react";
+import { UiLogo } from "./ui-logo";
 
 export function UIHeader({
   className,

@@ -9,10 +9,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePlaceDTO'
+              $ref: "#/components/schemas/CreatePlaceDTO"
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
   /places/{id}:
     get:
       operationId: PlaceController_getOne
@@ -23,8 +23,8 @@ paths:
           schema:
             type: number
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
   /uniqueplaces:
     post:
       operationId: UniquePlaceController_createUnique
@@ -34,10 +34,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateUniquePlaceDTO'
+              $ref: "#/components/schemas/CreateUniquePlaceDTO"
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
   /files:
     post:
       operationId: FileController_upload
@@ -57,8 +57,8 @@ paths:
                     type: string
                     format: binary
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
     get:
       operationId: FileController_getAllInPlace
       parameters:
@@ -78,12 +78,12 @@ paths:
           schema:
             type: number
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileDTO'
+                $ref: "#/components/schemas/FileDTO"
   /files/search:
     get:
       operationId: FileController_search
@@ -94,12 +94,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileDTO'
+                $ref: "#/components/schemas/FileDTO"
   /files/{id}:
     get:
       operationId: FileController_getOne
@@ -110,12 +110,12 @@ paths:
           schema:
             type: number
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileDTO'
+                $ref: "#/components/schemas/FileDTO"
     delete:
       operationId: FileController_delete
       parameters:
@@ -125,8 +125,8 @@ paths:
           schema:
             type: number
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -151,12 +151,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/downloadFileDTO'
+                $ref: "#/components/schemas/downloadFileDTO"
   /files/url/{accountid}/{filename}:
     get:
       operationId: FileController_getUrlFromUser
@@ -172,12 +172,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/downloadFileDTO'
+                $ref: "#/components/schemas/downloadFileDTO"
   /auth/sign-in:
     post:
       operationId: AuthController_signIn
@@ -187,10 +187,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignInDTO'
+              $ref: "#/components/schemas/SignInDTO"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
   /auth/sign-up:
     post:
       operationId: AuthController_signUp
@@ -200,39 +200,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignUpDTO'
+              $ref: "#/components/schemas/SignUpDTO"
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
   /auth/sign-out:
     post:
       operationId: AuthController_signOut
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
   /auth/session:
     get:
       operationId: AuthController_getSession
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetSessionDTO'
+                $ref: "#/components/schemas/GetSessionDTO"
   /account:
     get:
       operationId: AccountController_getAccount
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountDTO'
+                $ref: "#/components/schemas/AccountDTO"
     patch:
       operationId: AccountController_patchAccount
       parameters: []
@@ -241,17 +241,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchAccountDTO'
+              $ref: "#/components/schemas/PatchAccountDTO"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatchAccountDTO'
+                $ref: "#/components/schemas/PatchAccountDTO"
 info:
   title: File Place
-  description: ''
+  description: ""
   version: 1.0.0
   contact: {}
 tags: []
