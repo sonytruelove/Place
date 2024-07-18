@@ -17,7 +17,7 @@ export function UploadFiles() {
               type: 'string',
               format: 'binary',
             }
-          }
+          },
         }
       }
     }),

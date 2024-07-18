@@ -18,6 +18,6 @@ import { UniquePlaceModule } from './unique-place/unique-place.module';
     UsersModule,
     AccountModule,
     S3ClientModule,
-  ]
+  ],
 })
 export class AppModule {}

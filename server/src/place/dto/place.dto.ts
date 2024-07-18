@@ -11,3 +11,12 @@ export class PlaceDTO {
 
   underPlace: Place[];
 }
+export class PlacesDTO {
+  owner: Account;
+
+  id: number;
+
+  name: string | null;
+
+  files: File[];
+}

@@ -36,8 +36,9 @@ model Place {
   abovePlaceId Int?  
   owner   Account @relation(fields: [ownerId], references: [id])
   accessIdList  Int[]
-  name String?
+  name String
   url  String? 
+  publicAccess Boolean @default(false)
   underPlace Place[] @relation("directory")
   abovePlace Place? @relation("directory",fields: [abovePlaceId],references:[id])
   files File[]  @relation("directory")
@@ -48,7 +49,7 @@ model UniquePlace {
   ownerId Int  
   owner   Account @relation(fields: [ownerId], references: [id])
   accessIdList  Int[] 
-  name String? @unique
+  name String @unique
   url  String? @unique
   files File[]  @relation("directory")
 }

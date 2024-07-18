@@ -15,7 +15,7 @@ export class AccountService {
             name: "",
             url: '',
           }
-        }
+        },
       },
       include: { places: true },
     });
@@ -30,7 +30,7 @@ export class AccountService {
       },
       data: {
         accessIdList: [newAccount.id],
-      }
+      },
     });
     newAccount.places[0].accessIdList = [newAccount.id];
     return newAccount;

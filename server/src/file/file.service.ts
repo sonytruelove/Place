@@ -26,7 +26,7 @@ export class FileService {
         where: { id: Number(accountId) },
         include: {
           places: { where: { id: Number(placeId) }, include: { files: true } }
-        }
+        },
       });
       place = account.places[0];
     } catch (err) {
@@ -61,7 +61,7 @@ export class FileService {
             size: element.size,
             ext: element.mimetype,
             url: place.url + '/' + element.originalname
-          }
+          },
         });
       });
     } catch (e) {
@@ -136,10 +136,10 @@ export class FileService {
               include: {
                 files: {
                   where: { name: filename },
-                },
-              },
+                }
+              }
             }
-          },
+          }
         });
       } else {
         account = await this.db.account.findUniqueOrThrow({
@@ -150,9 +150,9 @@ export class FileService {
               include: {
                 files: {
                   where: { name: filename },
-                },
-              }
-            },
+                }
+              },
+            }
           },
         });
       }
@@ -174,7 +174,7 @@ export class FileService {
         name: {
           // search: query
         }
-      }
+      },
     });
     return files;
   }
@@ -185,7 +185,7 @@ export class FileService {
         where: { ownerId: Number(sessionId) },
         include: {
           files: { where: { id: Number(id) } }
-        }
+        },
       });
       if (!place) return 'No such file or forbidden';
       const file = place.files[0];
