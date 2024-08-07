@@ -6,8 +6,8 @@ import {
   InternalServerErrorException,
   BadRequestException,
 } from "@nestjs/common";
-import { MinioService } from 'nestjs-minio-client';
-import { config } from './config';
+import { MinioService } from "nestjs-minio-client";
+import { config } from "./config";
 @Injectable()
 export class S3Service {
   private readonly logger: Logger;
@@ -19,7 +19,7 @@ export class S3Service {
   }
 
   constructor(private readonly minio: MinioService) {
-    this.logger = new Logger('S3StorageService');
+    this.logger = new Logger("S3StorageService");
   }
 
   public async createBucket(accountId: string) {
@@ -43,12 +43,12 @@ export class S3Service {
 
   public async upload(
     file: Express.Multer.File,
-    placeUrl: string = '',
+    placeUrl: string = "",
     accountBucket: string = this.accountBucket,
   ) {
     const metaData = {
-      'Content-Type': file.mimetype,
-      'X-Amz-Meta-Testing': 1234
+      "Content-Type": file.mimetype,
+      "X-Amz-Meta-Testing": 1234,
     };
     const filename = placeUrl + file.originalname;
     const fileName: string = `${filename}`;
@@ -69,7 +69,7 @@ export class S3Service {
         }
       },
     );
-    return 'Succesfully uploaded';
+    return "Succesfully uploaded";
   }
 
   async delete(objectName: string, accountBucket: string = this.accountBucket) {

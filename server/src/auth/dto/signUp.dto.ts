@@ -1,13 +1,13 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class SignUpDTO {
   @ApiProperty({
-    example: 'CoolMan',
+    example: "CoolMan",
   })
   name: string;
 
   @ApiProperty({
-    example: 'CoolMan@gmail.com',
+    example: "CoolMan@gmail.com",
   })
   email: string;
 

@@ -1,11 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class UpdatePlaceDTO {
-  @ApiProperty({})
-  placeId: number;
-
   @ApiProperty({
-    example: 'My place',
+    example: "My place",
   })
   placeName: string;
 

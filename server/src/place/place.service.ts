@@ -1,8 +1,8 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { All, BadRequestException, Injectable } from "@nestjs/common";
 import { DBService } from "src/db/db.service";
 import { S3Service } from "../s3-client/s3-client.service";
 import { PlaceDTO, PlacesDTO } from "./dto/place.dto";
-import { UpdatePlaceDTO } from "./dto/update.place.dto";
+import { getAvailblePlacesDTO } from "./dto/get.availablePlaces.dto";
 @Injectable()
 export class PlaceService {
   constructor(
@@ -19,13 +19,14 @@ export class PlaceService {
       const account = await this.db.account.findUniqueOrThrow({
         where: { id: Number(accountId) },
         include: {
-          places: { where: { id: Number(abovePlaceId) } }
-        }
+          places: { where: { id: Number(abovePlaceId) } },
+        },
       });
       const isBucketExist = await this.S3Service.isBucketExist(
         accountId.toString(),
       );
-      if (!isBucketExist) throw new BadRequestException({ type: "The Bucket doesn't exist" });
+      if (!isBucketExist)
+        throw new BadRequestException({ type: "The Bucket doesn't exist" });
       const abovePlace = account.places[0];
       await this.S3Service.create(accountId.toString(), placeName);
 
@@ -35,10 +36,10 @@ export class PlaceService {
           accessIdList: [accountId],
           abovePlaceId: abovePlaceId,
           name: placeName,
-          url: abovePlace.url + '/' + placeName
+          url: abovePlace.url + "/" + placeName,
         },
       });
-      return 'Place succesffuly created';
+      return "Place succesffuly created";
     } catch (err) {
       console.log(err);
       throw new BadRequestException({ type: err });
@@ -51,8 +52,8 @@ export class PlaceService {
         where: { name: placeName },
       });
       if (isNameTaken) {
-      { throw new BadRequestException({
-          type: 'This place name used up already',
+        throw new BadRequestException({
+          type: "This place name used up already",
         });
       }
 
@@ -66,11 +67,12 @@ export class PlaceService {
         },
       });
       if (account[0].uniquePlaces.length >= account[0].uniqueQuota) {
-      { throw new BadRequestException({
-          type: 'Number of available unique places used up',
+        throw new BadRequestException({
+          type: "Number of available unique places used up",
         });
       }
-      if (!isBucketExist) throw new BadRequestException({ type: "The Bucket doesn't exist" });
+      if (!isBucketExist)
+        throw new BadRequestException({ type: "The Bucket doesn't exist" });
       await this.S3Service.create(accountId.toString(), placeName);
 
       const newPlace = await this.db.uniquePlace.create({
@@ -78,10 +80,10 @@ export class PlaceService {
           ownerId: accountId,
           accessIdList: [accountId],
           name: placeName,
-          url: placeName
+          url: placeName,
         },
       });
-      return 'Unique Place successfully created';
+      return "Unique Place successfully created";
     } catch (err) {
       console.log(err);
       throw new BadRequestException({ type: err });
@@ -96,18 +98,18 @@ export class PlaceService {
   ): Promise<boolean> {
     const place = await this.db.place.findUnique({
       where: {
-        id: Number(placeId)
-      }
+        id: Number(placeId),
+      },
     });
     if (!place || !place.accessIdList.includes(Number(accountId)))
       throw new BadRequestException({ type: "No such place or forbidden" });
     const updatedPlace = await this.db.place.update({
       where: {
-        id: placeId,
+        id: Number(placeId),
       },
       data: {
         name: placeName,
-        publicAccess: publicAccess
+        publicAccess: publicAccess,
       },
     });
     return updatedPlace !== undefined;
@@ -135,9 +137,73 @@ export class PlaceService {
       },
       include: {
         owner: true,
-        files: true,
       },
     });
     return places;
+  }
+
+  isObjectEmpty(value) {
+    return (
+      Boolean(value && typeof value === "object") && !Object.keys(value).length
+    );
+  }
+
+  async getPlacesAvailableByQuery(
+    accountId: number,
+    query: getAvailblePlacesDTO,
+  ): Promise<PlacesDTO[]> {
+    if (this.isObjectEmpty(query)) {
+      query = { skip: 0, take: 10 };
+    }
+    const skip = query.skip || 0;
+    const take = query.take || 10;
+    const model = query.isUnique ? "uniquePlace" : "place";
+    const { searchArea, searchText } = query;
+    let whereOwnerIdFilter = {};
+    if (searchArea == "My") whereOwnerIdFilter = { ownerId: accountId };
+    if (searchArea == "Other")
+      whereOwnerIdFilter = { NOT: { ownerId: accountId } };
+    const availablePlaces = await (
+      this.db[model] as Record<string, any>
+    ).findMany({
+      skip: Number(skip),
+      take: Number(take),
+      include: {
+        owner: true,
+      },
+      where: {
+        ...whereOwnerIdFilter,
+        AND: [
+          {
+            OR: [
+              {
+                name: {
+                  contains: searchText,
+                },
+              },
+              {
+                discription: {
+                  contains: searchText,
+                },
+              },
+            ],
+          },
+          {
+            OR: [
+              {
+                accessIdList: {
+                  has: Number(accountId),
+                },
+              },
+              { publicAccess: true },
+            ],
+          },
+        ],
+      },
+    });
+    if (availablePlaces) {
+      return availablePlaces;
+    }
+    throw new BadRequestException({ type: "No available places" });
   }
 }

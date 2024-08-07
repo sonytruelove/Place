@@ -1,25 +1,25 @@
-import { applyDecorators, UseInterceptors } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { applyDecorators, UseInterceptors } from "@nestjs/common";
+import { FilesInterceptor } from "@nestjs/platform-express";
+import { ApiBody, ApiConsumes } from "@nestjs/swagger";
 
 export function UploadFiles() {
   return applyDecorators(
-    UseInterceptors(FilesInterceptor('files')),
-    ApiConsumes('multipart/form-data'),
+    UseInterceptors(FilesInterceptor("files")),
+    ApiConsumes("multipart/form-data"),
     ApiBody({
       schema: {
-        type: 'object',
+        type: "object",
         properties: {
-          placeid: { type: 'number' },
+          placeid: { type: "number" },
           files: {
-            type: 'array',
+            type: "array",
             items: {
-              type: 'string',
-              format: 'binary',
-            }
+              type: "string",
+              format: "binary",
+            },
           },
-        }
-      }
+        },
+      },
     }),
   );
 }

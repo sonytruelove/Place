@@ -17,6 +17,4 @@ export class PlacesDTO {
   id: number;
 
   name: string | null;
-
-  files: File[];
 }

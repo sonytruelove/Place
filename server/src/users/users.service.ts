@@ -1,6 +1,6 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { DBService } from '../db/db.service';
-import { AccountService } from 'src/account/account.service';
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { DBService } from "../db/db.service";
+import { AccountService } from "src/account/account.service";
 
 @Injectable()
 export class UsersService {

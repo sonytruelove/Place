@@ -1,8 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreatePlaceDTO {
   @ApiProperty({
-    example: 'My place',
+    example: "My place",
   })
   placeName: string;
 

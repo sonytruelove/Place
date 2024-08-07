@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Place } from '@prisma/client';
+import { ApiProperty } from "@nestjs/swagger";
+import { Place } from "@prisma/client";
 
 export class AccountDTO {
   @ApiProperty()

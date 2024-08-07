@@ -22,6 +22,14 @@ export type FileControllerUploadBody = {
   placeid?: number;
 };
 
+export type PlaceControllerGetAvailableParams = {
+  skip?: number;
+  take?: number;
+  isUnique?: boolean;
+  searchArea?: string;
+  searchText?: string;
+};
+
 export interface PatchAccountDTO {
   places: string[];
 }
@@ -62,6 +70,11 @@ export interface CreateUniquePlaceDTO {
   placeName: string;
 }
 
+export interface UpdatePlaceDTO {
+  placeName: string;
+  publicAccess: boolean;
+}
+
 export interface CreatePlaceDTO {
   abovePlaceId: number;
   placeName: string;
@@ -79,6 +92,26 @@ export const placeControllerCreate = (
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: createPlaceDTO,
+    },
+    options,
+  );
+
+export const placeControllerGetAvailable = (
+  params?: PlaceControllerGetAvailableParams,
+  options?: SecondParameter<typeof createInstance>,
+) => createInstance<void>({ url: `/places`, method: "GET", params }, options);
+
+export const placeControllerUpdate = (
+  id: number,
+  updatePlaceDTO: BodyType<UpdatePlaceDTO>,
+  options?: SecondParameter<typeof createInstance>,
+) =>
+  createInstance<void>(
+    {
+      url: `/places/${id}`,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      data: updatePlaceDTO,
     },
     options,
   );
@@ -232,6 +265,12 @@ export const accountControllerPatchAccount = (
 
 export type PlaceControllerCreateResult = NonNullable<
   Awaited<ReturnType<typeof placeControllerCreate>>
+>;
+export type PlaceControllerGetAvailableResult = NonNullable<
+  Awaited<ReturnType<typeof placeControllerGetAvailable>>
+>;
+export type PlaceControllerUpdateResult = NonNullable<
+  Awaited<ReturnType<typeof placeControllerUpdate>>
 >;
 export type PlaceControllerGetOneResult = NonNullable<
   Awaited<ReturnType<typeof placeControllerGetOne>>

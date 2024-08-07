@@ -6,7 +6,7 @@ import { SessionInfo } from "src/auth/session-info.decorator";
 import { CreateUniquePlaceDTO } from "src/unique-place/dto/create.unique-place.dto";
 import { PlaceService } from "src/place/place.service";
 
-@Controller('/uniqueplaces')
+@Controller("/uniqueplaces")
 export class UniquePlaceController {
   constructor(private placeService: PlaceService) {}
 

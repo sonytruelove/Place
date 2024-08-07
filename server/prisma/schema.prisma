@@ -25,7 +25,7 @@ model Account{
   ownerId Int @unique
   owner   User @relation(fields: [ownerId], references: [id])
   uniqueQuota Int @default(1)
-  
+  name String @default("Placer")
   places Place[]
   uniquePlaces UniquePlace[]
 }
@@ -38,6 +38,7 @@ model Place {
   accessIdList  Int[]
   name String
   url  String? 
+  discription String?
   publicAccess Boolean @default(false)
   underPlace Place[] @relation("directory")
   abovePlace Place? @relation("directory",fields: [abovePlaceId],references:[id])
@@ -51,6 +52,8 @@ model UniquePlace {
   accessIdList  Int[] 
   name String @unique
   url  String? @unique
+  discription String?
+  publicAccess Boolean @default(false)
   files File[]  @relation("directory")
 }
 

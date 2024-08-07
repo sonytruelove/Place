@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { Response } from 'express';
+import { Injectable } from "@nestjs/common";
+import { Response } from "express";
 @Injectable()
 export class CookiesService {
-  static tokenKey = 'access-token';
+  static tokenKey = "access-token";
 
   setToken(res: Response, token: string) {
     res.cookie(CookiesService.tokenKey, token, {

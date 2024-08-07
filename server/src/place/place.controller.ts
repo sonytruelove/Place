@@ -5,18 +5,20 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards
+  Query,
+  UseGuards,
 } from "@nestjs/common";
-import { AuthGuard } from 'src/auth/auth.guard';
-import { GetSessionDTO } from 'src/auth/dto/getSession.dto';
-import { SessionInfo } from 'src/auth/session-info.decorator';
-import { PlaceService } from './place.service';
-import { CreatePlaceDTO } from './dto/create.place.dto';
-import { ApiCreatedResponse, ApiNoContentResponse } from '@nestjs/swagger';
-import { PlaceDTO, PlacesDTO } from './dto/place.dto';
+import { AuthGuard } from "src/auth/auth.guard";
+import { GetSessionDTO } from "src/auth/dto/getSession.dto";
+import { SessionInfo } from "src/auth/session-info.decorator";
+import { PlaceService } from "./place.service";
+import { CreatePlaceDTO } from "./dto/create.place.dto";
+import { ApiCreatedResponse, ApiNoContentResponse } from "@nestjs/swagger";
+import { PlaceDTO, PlacesDTO } from "./dto/place.dto";
 import { UpdatePlaceDTO } from "./dto/update.place.dto";
+import { getAvailblePlacesDTO } from "./dto/get.availablePlaces.dto";
 
-@Controller('/places')
+@Controller("/places")
 export class PlaceController {
   constructor(private placeService: PlaceService) {}
 
@@ -38,12 +40,13 @@ export class PlaceController {
   @UseGuards(AuthGuard)
   @ApiNoContentResponse()
   async update(
+    @Param("id") placeId: number,
     @Body() dto: UpdatePlaceDTO,
     @SessionInfo() session: GetSessionDTO,
   ): Promise<boolean> {
     return await this.placeService.update(
       session.id,
-      dto.placeId,
+      placeId,
       dto.placeName,
       dto.publicAccess,
     );
@@ -58,8 +61,17 @@ export class PlaceController {
     return await this.placeService.getOne(session.id, placeId);
   }
 
+  /* @Get()
+   async getAllPublic(): Promise<PlacesDTO[]> {
+     return await this.placeService.getAllPublic();
+   } */
+
   @Get()
-  async getAllPublic(): Promise<PlacesDTO[]> {
-    return await this.placeService.getAllPublic();
+  @UseGuards(AuthGuard)
+  async getAvailable(
+    @SessionInfo() session: GetSessionDTO,
+    @Query() query: getAvailblePlacesDTO,
+  ): Promise<PlacesDTO[]> {
+    return await this.placeService.getPlacesAvailableByQuery(session.id, query);
   }
 }

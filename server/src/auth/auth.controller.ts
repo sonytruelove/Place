@@ -7,24 +7,24 @@ import {
   Post,
   Res,
   UseGuards,
-} from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
-import { SignUpDTO } from './dto/signUp.dto';
-import { SignInDTO } from './dto/signIn.dto';
-import { AuthService } from './auth.service';
-import { Response } from 'express';
-import { CookiesService } from './cookies.service';
-import { AuthGuard } from './auth.guard';
-import { SessionInfo } from './session-info.decorator';
-import { GetSessionDTO } from './dto/getSession.dto';
-@Controller('auth')
+} from "@nestjs/common";
+import { ApiCreatedResponse, ApiOkResponse } from "@nestjs/swagger";
+import { SignUpDTO } from "./dto/signUp.dto";
+import { SignInDTO } from "./dto/signIn.dto";
+import { AuthService } from "./auth.service";
+import { Response } from "express";
+import { CookiesService } from "./cookies.service";
+import { AuthGuard } from "./auth.guard";
+import { SessionInfo } from "./session-info.decorator";
+import { GetSessionDTO } from "./dto/getSession.dto";
+@Controller("auth")
 export class AuthController {
   constructor(
     private authService: AuthService,
     private cookiesService: CookiesService,
   ) {}
 
-  @Post('sign-in')
+  @Post("sign-in")
   @ApiOkResponse()
   @HttpCode(HttpStatus.OK)
   async signIn(
@@ -38,7 +38,7 @@ export class AuthController {
     this.cookiesService.setToken(res, accessToken);
   }
 
-  @Post('sign-up')
+  @Post("sign-up")
   @HttpCode(HttpStatus.OK)
   @ApiCreatedResponse()
   async signUp(
@@ -53,7 +53,7 @@ export class AuthController {
     this.cookiesService.setToken(res, accessToken);
   }
 
-  @Post('sign-out')
+  @Post("sign-out")
   @ApiOkResponse()
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
@@ -61,7 +61,7 @@ export class AuthController {
     this.cookiesService.removeToken(res);
   }
 
-  @Get('session')
+  @Get("session")
   @ApiOkResponse({
     type: GetSessionDTO,
   })

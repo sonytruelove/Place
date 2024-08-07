@@ -3,11 +3,11 @@ import {
   ForbiddenException,
   HttpException,
   Injectable,
-  InternalServerErrorException
-} from '@nestjs/common';
-import { DBService } from '../db/db.service';
-import { S3Service } from '../s3-client/s3-client.service';
-import { FileDTO } from './dto/file.dto';
+  InternalServerErrorException,
+} from "@nestjs/common";
+import { DBService } from "../db/db.service";
+import { S3Service } from "../s3-client/s3-client.service";
+import { FileDTO } from "./dto/file.dto";
 @Injectable()
 export class FileService {
   constructor(
@@ -25,7 +25,7 @@ export class FileService {
       const account = await this.db.account.findUniqueOrThrow({
         where: { id: Number(accountId) },
         include: {
-          places: { where: { id: Number(placeId) }, include: { files: true } }
+          places: { where: { id: Number(placeId) }, include: { files: true } },
         },
       });
       place = account.places[0];
@@ -38,14 +38,16 @@ export class FileService {
         type: "No place with such ID or access for your account",
       });
     }
-    if (!fileRes.length) throw new BadRequestException({ type: 'No files' });
+    if (!fileRes.length) throw new BadRequestException({ type: "No files" });
     try {
       const isBucketExist = await this.S3Service.isBucketExist(
         accountId.toString(),
       );
-      if (!isBucketExist) throw new BadRequestException({ type: "The Bucket doesn't exist" });
+      if (!isBucketExist)
+        throw new BadRequestException({ type: "The Bucket doesn't exist" });
       fileRes.forEach(async (element) => {
-        if (place.url == '') await this.S3Service.upload(element, '', place.ownerId.toString());
+        if (place.url == "")
+          await this.S3Service.upload(element, "", place.ownerId.toString());
         else {
           await this.S3Service.upload(
             element,
@@ -60,14 +62,14 @@ export class FileService {
             name: element.originalname,
             size: element.size,
             ext: element.mimetype,
-            url: place.url + '/' + element.originalname
+            url: place.url + "/" + element.originalname,
           },
         });
       });
     } catch (e) {
       throw new BadRequestException(e.type);
     }
-    return 'Successfuly uploaded';
+    return "Successfuly uploaded";
   }
 
   async getAllInPlace(
@@ -79,7 +81,7 @@ export class FileService {
     const files = await this.db.file.findMany({
       where: { placeId: Number(placeId) },
       skip: Number(offset),
-      take: Number(count)
+      take: Number(count),
     });
     const file: {
       id: number;
@@ -90,12 +92,14 @@ export class FileService {
       ext: string;
       url: string;
       uploadedAt: Date;
-    } = files.filter((file) => file.accessIdList.includes(Number(sessionId)),)[0];
+    } = files.filter((file) =>
+      file.accessIdList.includes(Number(sessionId)),
+    )[0];
     if (file) {
       delete file.accessIdList;
       return file;
     }
-    throw new BadRequestException({ type: 'No file or Forbidden' });
+    throw new BadRequestException({ type: "No file or Forbidden" });
   }
 
   async getOne(sessionId, id: number): Promise<FileDTO> {
@@ -114,7 +118,7 @@ export class FileService {
         delete file.accessIdList;
         return file;
       }
-      throw new BadRequestException({ type: 'No file or Forbidden' });
+      throw new BadRequestException({ type: "No file or Forbidden" });
     } catch (e) {
       return e;
     }
@@ -136,10 +140,10 @@ export class FileService {
               include: {
                 files: {
                   where: { name: filename },
-                }
-              }
-            }
-          }
+                },
+              },
+            },
+          },
         });
       } else {
         account = await this.db.account.findUniqueOrThrow({
@@ -150,17 +154,21 @@ export class FileService {
               include: {
                 files: {
                   where: { name: filename },
-                }
+                },
               },
-            }
+            },
           },
         });
       }
 
       const place = account.places[0];
-      if (!place.files) throw new BadRequestException({ type: 'No-file-with-that-name' });
-      const file = place.files.filter((file) => file.accessIdList.includes(Number(sessionId)),)[0];
-      if (!file) throw new BadRequestException({ type: 'No-file-or-forbidden' });
+      if (!place.files)
+        throw new BadRequestException({ type: "No-file-with-that-name" });
+      const file = place.files.filter((file) =>
+        file.accessIdList.includes(Number(sessionId)),
+      )[0];
+      if (!file)
+        throw new BadRequestException({ type: "No-file-or-forbidden" });
       const res = await this.S3Service.getUrl(accountId.toString(), file.url);
       return res;
     } catch (err) {
@@ -173,7 +181,7 @@ export class FileService {
       where: {
         name: {
           // search: query
-        }
+        },
       },
     });
     return files;
@@ -184,12 +192,12 @@ export class FileService {
       const place = await this.db.place.findFirst({
         where: { ownerId: Number(sessionId) },
         include: {
-          files: { where: { id: Number(id) } }
+          files: { where: { id: Number(id) } },
         },
       });
-      if (!place) return 'No such file or forbidden';
+      if (!place) return "No such file or forbidden";
       const file = place.files[0];
-      if (!file) return 'No such file or forbidden';
+      if (!file) return "No such file or forbidden";
       await this.db.file.delete({ where: { id: Number(id) } });
       await this.S3Service.delete(file.name, sessionId.toString());
       return "Successfuly deleted: " + file.name;

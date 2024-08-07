@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail } from "class-validator";
 export class GetSessionDTO {
   @ApiProperty()
   id: number;
@@ -9,7 +9,7 @@ export class GetSessionDTO {
   email: string;
 
   @ApiProperty()
-  'iat': number;
+  "iat": number;
 
   @ApiProperty()
   "exp": number;

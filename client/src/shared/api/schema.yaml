@@ -13,7 +13,65 @@ paths:
       responses:
         "201":
           description: ""
+    get:
+      operationId: PlaceController_getAvailable
+      parameters:
+        - name: skip
+          required: false
+          in: query
+          example: 0
+          schema:
+            default: 0
+            type: number
+        - name: take
+          required: false
+          in: query
+          example: 2
+          schema:
+            default: 10
+            type: number
+        - name: isUnique
+          required: false
+          in: query
+          example: true
+          schema:
+            default: false
+            type: boolean
+        - name: searchArea
+          required: false
+          in: query
+          example: My
+          schema:
+            default: All
+            type: string
+        - name: searchText
+          required: false
+          in: query
+          example: My place
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          description: ""
   /places/{id}:
+    patch:
+      operationId: PlaceController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePlaceDTO"
+      responses:
+        "204":
+          description: ""
     get:
       operationId: PlaceController_getOne
       parameters:
@@ -269,6 +327,18 @@ components:
       required:
         - placeName
         - abovePlaceId
+    UpdatePlaceDTO:
+      type: object
+      properties:
+        placeName:
+          type: string
+          example: My place
+        publicAccess:
+          type: boolean
+          example: true
+      required:
+        - placeName
+        - publicAccess
     CreateUniquePlaceDTO:
       type: object
       properties:
