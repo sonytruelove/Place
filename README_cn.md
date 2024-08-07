@@ -104,16 +104,22 @@ Next.js, Typescript, Webpack
 這不是一家新創公司，所以沒有必要。
 <h2>計畫：</h2>
 <ul>
+<li>✅ 开始开发基础版本</li>
 <li>✅ 描述要求</li>
 <li>✅ 描述架構和技術堆疊</li>
 <li>✅ 介紹專案的伺服器部分</li>
 <li>✅ 描述行為準則</li>
 <li>✅ 設計自訂路徑</li>
-<li>开发 UI 套件</li>
-<li>开发设计系统</li>
-<li>介紹專案的客戶端部分</li>
+<li>✅ 开发 UI 套件</li>
+<li>✅ 开发设计系统</li>
+<li>✅ 介紹專案的客戶端部分</li>
 <li>獲得 MVP</li>
 <li>...</li>
+</ul>
+<ul>
+<li>开始开发企业版</li>
+<li>连接Prometheus+Graphana记录器</li>
+<li>划分为微服务</li>
 </ul>
 <h2>變化</h2>
 <h3>拒絕 TarantoolDB</h3>

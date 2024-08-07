@@ -109,16 +109,21 @@ Next.js, Typescript, Webpack
 It's no start-up, so i needn't.
 <h2>TODO:</h2>
 <ul>
+<li>✅ Start developing a basic version</li>
 <li>✅ Describe a requirements</li>
 <li>✅ Describe a Architecture with Tech-stack</li>
 <li>✅ Introduce a server part of project</li>
 <li>✅ Describe a Code-of-Conduct</li>
 <li>✅ Describe User-flow</li>
-<li>Develop UI kit</li>
-<li>Develop Design system</li>
-<li>Introduce a front-end part of project</li>
+<li>✅ Develop UI kit</li>
+<li>✅ Develop Design system</li>
+<li>✅ Introduce a front-end part of project</li>
 <li>Do a MVP</li>
-<li>...</li>
+</ul>
+<ul>
+<li>Start developing the Enterprise version</li>
+<li>Connect Prometheus+Graphana logger</li>
+<li>Divide into microservices</li>
 </ul>
 <h2>Changes</h2>
 <h3>Remove TarantoolDB</h3>
