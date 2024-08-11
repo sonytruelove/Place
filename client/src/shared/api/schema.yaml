@@ -33,7 +33,7 @@ paths:
         - name: isUnique
           required: false
           in: query
-          example: true
+          example: false
           schema:
             default: false
             type: boolean
@@ -80,6 +80,65 @@ paths:
           in: path
           schema:
             type: number
+      responses:
+        "200":
+          description: ""
+  /placer-list/{id}:
+    get:
+      operationId: PlacerListController_getOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+  /placer-list:
+    get:
+      operationId: PlacerListController_getAllPublic
+      parameters:
+        - name: skip
+          required: false
+          in: query
+          example: 0
+          schema:
+            default: 0
+            type: number
+        - name: take
+          required: false
+          in: query
+          example: 2
+          schema:
+            default: 10
+            type: number
+        - name: searchArea
+          required: false
+          in: query
+          example: My
+          schema:
+            default: All
+            type: string
+        - name: searchText
+          required: false
+          in: query
+          example: Placer
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          description: ""
+    patch:
+      operationId: PlacerListController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePlacerListDTO"
       responses:
         "200":
           description: ""
@@ -339,6 +398,13 @@ components:
       required:
         - placeName
         - publicAccess
+    UpdatePlacerListDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 0
+          default: 0
     CreateUniquePlaceDTO:
       type: object
       properties:
@@ -417,9 +483,9 @@ components:
     PatchAccountDTO:
       type: object
       properties:
-        places:
-          type: array
-          items:
-            type: string
-      required:
-        - places
+        name:
+          type: string
+          example: CoolMan
+        discription:
+          type: string
+          example: I'm CoolMan!

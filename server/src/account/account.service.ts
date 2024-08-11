@@ -48,7 +48,10 @@ export class AccountService {
     return this.db.account.update({
       where: { id: accountId },
       include: { places: true },
-      data: { places: {} },
+      data: {
+        name: patch.name,
+        discription: patch.discription,
+      },
     });
   }
 }

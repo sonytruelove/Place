@@ -7,10 +7,12 @@ import { AccountModule } from "./account/account.module";
 import { S3ClientModule } from "./s3-client/s3-client.module";
 import { PlaceModule } from "./place/place.module";
 import { UniquePlaceModule } from "./unique-place/unique-place.module";
+import { PlacerListModule } from "./placer-list/placer-list.module";
 
 @Module({
   imports: [
     PlaceModule,
+    PlacerListModule,
     UniquePlaceModule,
     FileModule,
     DBModule,

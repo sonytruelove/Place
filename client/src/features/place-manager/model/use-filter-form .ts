@@ -10,7 +10,6 @@ export function useFilterForm(setPlacesData: any) {
 
   return {
     register,
-    // handleSubmit: handleSubmit(data => console.log(data))
     handleSubmit: handleSubmit((data) => {
       setPlacesData(data);
     }),

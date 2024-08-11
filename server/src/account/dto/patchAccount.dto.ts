@@ -1,10 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Place } from "@prisma/client";
-import { IsBoolean, IsOptional } from "class-validator";
+import { ApiPropertyOptional } from "@nestjs/swagger";
 
 export class PatchAccountDTO {
-  @ApiProperty()
-  @IsBoolean()
-  @IsOptional()
-  places: Place[];
+  @ApiPropertyOptional({
+    example: "CoolMan",
+  })
+  name: string;
+
+  @ApiPropertyOptional({
+    example: "I'm CoolMan!",
+  })
+  discription: string;
 }

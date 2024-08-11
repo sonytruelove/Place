@@ -16,7 +16,7 @@ import { CreatePlaceDTO } from "./dto/create.place.dto";
 import { ApiCreatedResponse, ApiNoContentResponse } from "@nestjs/swagger";
 import { PlaceDTO, PlacesDTO } from "./dto/place.dto";
 import { UpdatePlaceDTO } from "./dto/update.place.dto";
-import { getAvailblePlacesDTO } from "./dto/get.availablePlaces.dto";
+import { getAvailablePlacesDTO } from "./dto/get.availablePlaces.dto";
 
 @Controller("/places")
 export class PlaceController {
@@ -70,7 +70,7 @@ export class PlaceController {
   @UseGuards(AuthGuard)
   async getAvailable(
     @SessionInfo() session: GetSessionDTO,
-    @Query() query: getAvailblePlacesDTO,
+    @Query() query: getAvailablePlacesDTO,
   ): Promise<PlacesDTO[]> {
     return await this.placeService.getPlacesAvailableByQuery(session.id, query);
   }

@@ -26,6 +26,9 @@ model Account{
   owner   User @relation(fields: [ownerId], references: [id])
   uniqueQuota Int @default(1)
   name String @default("Placer")
+  discription String @default("")
+  placerList Account[] @relation("placerList")
+  placerListRelation Account[] @relation("placerList")
   places Place[]
   uniquePlaces UniquePlace[]
 }

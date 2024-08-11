@@ -1,14 +1,8 @@
 import { useSessionQuery } from "@/entities/session/queries";
-import { SignInForm, SignOutButton } from "@/features/auth";
+import { SignOutButton } from "@/features/auth";
 import { FilterForm } from "@/features/place-manager/ui/filter-form";
-import { placeControllerGetAvailable } from "@/shared/api/generated";
-import { ROUTES } from "@/shared/constants/routes";
-import { UIFormPageLayout } from "@/shared/ui/layouts/ui-form-page-layout";
 import { UIHeader } from "@/shared/ui/ui-header";
-import { UIPageSpinner } from "@/shared/ui/ui-page-spinner";
 import UIPlaceList from "@/shared/ui/ui-place-list";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { useState } from "react";
 
 export function PlaceManagerPage() {

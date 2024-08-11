@@ -13,7 +13,6 @@ export function UIPlaceCard({
   props: UIPlaceProps;
 }) {
   const { owner, name } = props;
-  console.log(props);
   return (
     <div className={clsx(className, "justify-center items-center")}>
       {" "}
@@ -21,7 +20,7 @@ export function UIPlaceCard({
         <Logo className="w-16 h-16 pb-3.5 fill-primary-400" />
       </div>
       <span className="mt-1 text-lg font-medium text-gray-900">{name}</span>
-      <h3 className="mt-4 text-sm text-gray-700">{`${owner.name}1`}</h3>
+      <h3 className="mt-4 text-sm text-gray-700">{owner.name}</h3>
     </div>
   );
 }

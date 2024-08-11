@@ -2,7 +2,9 @@ import { All, BadRequestException, Injectable } from "@nestjs/common";
 import { DBService } from "src/db/db.service";
 import { S3Service } from "../s3-client/s3-client.service";
 import { PlaceDTO, PlacesDTO } from "./dto/place.dto";
-import { getAvailblePlacesDTO } from "./dto/get.availablePlaces.dto";
+import { getAvailablePlacesDTO } from "./dto/get.availablePlaces.dto";
+import { isObjectEmpty } from "src/shared/isObjectEmpty";
+import { Prisma } from "@prisma/client";
 @Injectable()
 export class PlaceService {
   constructor(
@@ -142,17 +144,11 @@ export class PlaceService {
     return places;
   }
 
-  isObjectEmpty(value) {
-    return (
-      Boolean(value && typeof value === "object") && !Object.keys(value).length
-    );
-  }
-
   async getPlacesAvailableByQuery(
     accountId: number,
-    query: getAvailblePlacesDTO,
+    query: getAvailablePlacesDTO,
   ): Promise<PlacesDTO[]> {
-    if (this.isObjectEmpty(query)) {
+    if (isObjectEmpty(query)) {
       query = { skip: 0, take: 10 };
     }
     const skip = query.skip || 0;
@@ -179,11 +175,13 @@ export class PlaceService {
               {
                 name: {
                   contains: searchText,
+                  mode: Prisma.QueryMode.insensitive,
                 },
               },
               {
                 discription: {
                   contains: searchText,
+                  mode: Prisma.QueryMode.insensitive,
                 },
               },
             ],

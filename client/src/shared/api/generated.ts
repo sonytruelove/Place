@@ -22,6 +22,13 @@ export type FileControllerUploadBody = {
   placeid?: number;
 };
 
+export type PlacerListControllerGetAllPublicParams = {
+  skip?: number;
+  take?: number;
+  searchArea?: string;
+  searchText?: string;
+};
+
 export type PlaceControllerGetAvailableParams = {
   skip?: number;
   take?: number;
@@ -31,7 +38,8 @@ export type PlaceControllerGetAvailableParams = {
 };
 
 export interface PatchAccountDTO {
-  places: string[];
+  discription?: string;
+  name?: string;
 }
 
 export interface AccountDTO {
@@ -68,6 +76,10 @@ export interface FileDTO {
 
 export interface CreateUniquePlaceDTO {
   placeName: string;
+}
+
+export interface UpdatePlacerListDTO {
+  id?: number;
 }
 
 export interface UpdatePlaceDTO {
@@ -120,6 +132,32 @@ export const placeControllerGetOne = (
   id: number,
   options?: SecondParameter<typeof createInstance>,
 ) => createInstance<void>({ url: `/places/${id}`, method: "GET" }, options);
+
+export const placerListControllerGetOne = (
+  id: number,
+  options?: SecondParameter<typeof createInstance>,
+) =>
+  createInstance<void>({ url: `/placer-list/${id}`, method: "GET" }, options);
+
+export const placerListControllerGetAllPublic = (
+  params?: PlacerListControllerGetAllPublicParams,
+  options?: SecondParameter<typeof createInstance>,
+) =>
+  createInstance<void>({ url: `/placer-list`, method: "GET", params }, options);
+
+export const placerListControllerUpdate = (
+  updatePlacerListDTO: BodyType<UpdatePlacerListDTO>,
+  options?: SecondParameter<typeof createInstance>,
+) =>
+  createInstance<void>(
+    {
+      url: `/placer-list`,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      data: updatePlacerListDTO,
+    },
+    options,
+  );
 
 export const uniquePlaceControllerCreateUnique = (
   createUniquePlaceDTO: BodyType<CreateUniquePlaceDTO>,
@@ -274,6 +312,15 @@ export type PlaceControllerUpdateResult = NonNullable<
 >;
 export type PlaceControllerGetOneResult = NonNullable<
   Awaited<ReturnType<typeof placeControllerGetOne>>
+>;
+export type PlacerListControllerGetOneResult = NonNullable<
+  Awaited<ReturnType<typeof placerListControllerGetOne>>
+>;
+export type PlacerListControllerGetAllPublicResult = NonNullable<
+  Awaited<ReturnType<typeof placerListControllerGetAllPublic>>
+>;
+export type PlacerListControllerUpdateResult = NonNullable<
+  Awaited<ReturnType<typeof placerListControllerUpdate>>
 >;
 export type UniquePlaceControllerCreateUniqueResult = NonNullable<
   Awaited<ReturnType<typeof uniquePlaceControllerCreateUnique>>

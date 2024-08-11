@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 
-export class getAvailablePlacesDTO {
+export class GetPlacerListDTO {
   @ApiPropertyOptional({
     example: 0,
     default: 0,
@@ -14,19 +14,13 @@ export class getAvailablePlacesDTO {
   take?: number;
 
   @ApiPropertyOptional({
-    example: false,
-    default: false,
-  })
-  isUnique?: boolean;
-
-  @ApiPropertyOptional({
     example: "My",
     default: "All",
   })
   searchArea?: string;
 
   @ApiPropertyOptional({
-    example: "My place",
+    example: "Placer",
     default: "",
   })
   searchText?: string;
