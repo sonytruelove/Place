@@ -31,6 +31,12 @@ So I need to duplicate a field,like this:
   symmetricFriends  User[] @relation("UserFriends")
 }```
 
+<h2>PROBLEM #6</h2>
+When I bring up Docker compose, the Cockroach DB and Minio services does not start with the error:<br>
+`Fatal glibc error: CPU does not support x86-64-v2`
+<br>
+ Apparently the latest version requires the processor to support x86-64-v2. I'm not sure if my processor doesn't support this, but I'm on Virtual Box.
+
 <h2>MISTAKE #1</h2>
 I recently found out that Node js does not support multithreading, under the hood it has multiprocessing<br>
 This is not an optimal solution in a High-load context
