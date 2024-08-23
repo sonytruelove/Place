@@ -7,12 +7,12 @@ import {
   BadRequestException,
 } from "@nestjs/common";
 import { MinioService } from "nestjs-minio-client";
-import { config } from "./config";
+import { env } from "process";
 @Injectable()
 export class S3Service {
   private readonly logger: Logger;
 
-  private readonly accountBucket = config.MINIO_BUCKET;
+  private readonly accountBucket = env.S3_BUCKET || "files";
 
   public get client() {
     return this.minio.client;

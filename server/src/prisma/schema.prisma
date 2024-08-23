@@ -4,7 +4,9 @@
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "fullTextIndex"] 
+  binaryTargets = ["native","debian-openssl-3.0.x","linux-musl","linux-musl-openssl-3.0.x"]
 }
+
 
 datasource db {
   provider = "cockroachdb"
