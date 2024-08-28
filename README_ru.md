@@ -20,7 +20,17 @@
 [Клонируйте](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository) этот репозиторий<br>
 Перейдите в back-end папку<br>
 `cd server` <br>
-Переименуйте "production.env" в ".env"(Также измените данные в конфигурации s3 и env, если вы хотите работать с Place.) <br>
+Создайте ".env" и "docker.env"(Также измените данные в конфигурации s3 и env, если вы хотите работать с Place.)<br> 
+docker.env пример docker.env файла:
+```
+DATABASE_URL=postgresql://root@crdb:26257/defaultdb?sslmode=disable&schema=public
+JWT_SECRET=secret-key
+S3_PORT=9000
+S3_ENDPOINT=nginx-minio
+S3_ACCESS_KEY=ACCESS_KEY
+S3_SECRET_KEY=SECRET_KEY
+```
+<br>
 `npx prisma generate` чтобы соединить базу данных и env файл с Prisma.
 <h3>С помощью Docker Compose</h3>
 

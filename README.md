@@ -25,7 +25,17 @@ Setup [git](https://git-scm.com/downloads)
 [Clone](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository) repository<br>
 Go to back-end directory:<br>
 `cd server` <br>
-Rename "production.env" to ".env"(Also change data in s3 config and env if you want to work with Place) <br>
+Create ".env" and "docker.env" (Also change the data in s3 and env configuration if you want to work with Place.)<br> 
+docker.env example:
+```
+DATABASE_URL=postgresql://root@crdb:26257/defaultdb?sslmode=disable&schema=public
+JWT_SECRET=secret-key
+S3_PORT=9000
+S3_ENDPOINT=nginx-minio
+S3_ACCESS_KEY=ACCESS_KEY
+S3_SECRET_KEY=SECRET_KEY
+```
+<br>
 `npx prisma generate` for connect env with prisma 
 <h3>Using Docker Compose</h3>
 

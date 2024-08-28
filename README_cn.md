@@ -20,7 +20,17 @@
 [複製](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository) 這個儲存庫<br>
 轉到後端資料夾<br>
 `cd server` <br>
-重新命名為 "production.env"  ".env"(如果您想使用 Place，也可以變更 s3 和 env 配置中的數據.) <br>
+创建“.env”和“docker.env”（如果您想使用 Place，还可以更改 s3 和 env 配置中的数据。）<br> 
+docker.env 示例：
+```
+DATABASE_URL=postgresql://root@crdb:26257/defaultdb?sslmode=disable&schema=public
+JWT_SECRET=secret-key
+S3_PORT=9000
+S3_ENDPOINT=nginx-minio
+S3_ACCESS_KEY=ACCESS_KEY
+S3_SECRET_KEY=SECRET_KEY
+```
+<br>
 `npx prisma generate` 使用 Prisma 連接資料庫和 env 文件.
 <h3>使用 Docker Compose</h3>
 
