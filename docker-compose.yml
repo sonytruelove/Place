@@ -1,7 +1,7 @@
 version: '3.5'
 
 x-service-common: &service-common
-  env_file: "./docker.env"
+  env_file: "./server/docker.env" 
 
 x-minio-common: &minio-common
   image: quay.io/minio/minio:RELEASE.2024-08-03T04-33-23Z-cpuv1
@@ -16,7 +16,7 @@ x-minio-common: &minio-common
     - "9001"
   environment:
     MINIO_ACCESS_KEY: env('S3_ACCESS_KEY')
-    MINIO_SECRET_KEY: env('S3_ACCESS_KEY')
+    MINIO_SECRET_KEY: env('S3_SECRET_KEY')
 
 services:
   crdb:
@@ -27,32 +27,32 @@ services:
       - "8080:8080"
     command: start-single-node --insecure 
     volumes:
-      - ./data/node_1:/cockroach/cockroach-data
+      - ./server/data/node_1:/cockroach/cockroach-data
 
   minio1:
     <<: *minio-common
     hostname: minio1
     volumes:
-      - ./s3/data1-1:/data1
-      - ./s3/data1-2:/data2
+      - ./server/s3/data1-1:/data1
+      - ./server/s3/data1-2:/data2
   minio2:
     <<: *minio-common
     hostname: minio2
     volumes:
-      - ./s3/data2-1:/data1
-      - ./s3/data2-2:/data2
+      - ./server/s3/data2-1:/data1
+      - ./server/s3/data2-2:/data2
   minio3:
     <<: *minio-common
     hostname: minio3
     volumes:
-      - ./s3/data3-1:/data1
-      - ./s3/data3-2:/data2
+      - ./server/s3/data3-1:/data1
+      - ./server/s3/data3-2:/data2
   minio4:
     <<: *minio-common
     hostname: minio4
     volumes:
-      - ./s3/data4-1:/data1
-      - ./s3/data4-2:/data2
+      - ./server/s3/data4-1:/data1
+      - ./server/s3/data4-2:/data2
   nginx-minio:
     image: nginx:latest
     hostname: nginx
@@ -69,14 +69,14 @@ services:
   app:
     <<: *service-common
     build:
-      context: .
+      context: ./server
       dockerfile: Dockerfile
       target: development
     environment:
       PORT: 5000
       DATABASE_URL: postgresql://root@crdb:26257/defaultdb?sslmode=disable&schema=public
     volumes:
-      - .:/usr/src/app
+      - ./server:/usr/src/app
     ports:
       - 5000:5000
     depends_on:
